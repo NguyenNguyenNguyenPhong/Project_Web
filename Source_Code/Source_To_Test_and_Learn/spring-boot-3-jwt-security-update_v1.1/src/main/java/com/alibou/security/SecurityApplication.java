@@ -15,8 +15,8 @@ public class SecurityApplication {
 		SpringApplication.run(SecurityApplication.class, args);
 	}
 
-//	public Docket apis(){
-//		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("com.alibou.security")).build();
-//
-//	}
+	public Docket apis(){
+		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("com.alibou.security")).build();
+
+	}
 }
