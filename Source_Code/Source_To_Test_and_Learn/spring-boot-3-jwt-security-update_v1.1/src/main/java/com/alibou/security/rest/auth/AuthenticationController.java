@@ -1,4 +1,4 @@
-package com.alibou.security.auth;
+package com.alibou.security.rest.auth;
 
 import io.swagger.annotations.Api;
 import jakarta.servlet.http.HttpServletRequest;
