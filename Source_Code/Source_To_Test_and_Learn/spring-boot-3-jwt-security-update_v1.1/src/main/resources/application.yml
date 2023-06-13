@@ -1,178 +1,22 @@
-// Include the libraries we need
-#include <OneWire.h>
-#include <DallasTemperature.h>
-#include <SPI.h>
-#include <Wire.h>
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
-#include "RTClib.h"
-#include <string.h>
-#include "EEPROM.h"
-// Data wire is plugged into port 2 on the Arduino
-#define ONE_WIRE_BUS 04
-#define SCREEN_WIDTH 128 // OLED display width, in pixels
-#define SCREEN_HEIGHT 64 // OLED display height, in pixels
-#define OLED_RESET     -1 // Reset pin # (or -1 if sharing Arduino reset pin)
-#define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
-RTC_DS1307 rtc;
-int addr = 0;
-#define EEPROM_SIZE 64
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
-// Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
-OneWire oneWire(ONE_WIRE_BUS);
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3307/database_web_final
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
 
-// Pass our oneWire reference to Dallas Temperature. 
-DallasTemperature sensors(&oneWire);
-
-/*
- * The setup function. We only start the sensors here
- */
-void setup(void)
-{
-
-  // start serial port
-  Serial.begin(9600);
-  Serial.println("Dallas Temperature IC Control Library Demo");
-  if (! rtc.begin()) {
-
-    Serial.println("Couldn't find RTC");
-
-    Serial.flush();
-
-    while (1) delay(10);
-
-  }
-
-
-
-
-  if (! rtc.isrunning()) {
-
-    Serial.println("RTC is NOT running, let's set the time!");
-
-    // When time needs to be set on a new device, or after a power loss, the
-
-    // following line sets the RTC to the date & time this sketch was compiled
-
-    rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
-
-    // This line sets the RTC with an explicit date & time, for example to set
-
-    // January 21, 2014 at 3am you would call:
-
-    // rtc.adjust(DateTime(2014, 1, 21, 3, 0, 0));
-
-  }
-  if(!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
-    Serial.println(F("SSD1306 allocation failed"));
-    for(;;); // Don't proceed, loop forever
-  }
-  // Start up the library
-  display.invertDisplay(true);
-  delay(1000);
-  display.invertDisplay(false);
-  delay(1000);
-  sensors.begin();
-}
-
-/*
- * Main function, get and show the temperature
- */
-// void loop(void)
-// { 
-//   // call sensors.requestTemperatures() to issue a global temperature 
-//   // request to all devices on the bus
-//   Serial.print("Requesting temperatures...");
-//   sensors.requestTemperatures(); // Send the command to get temperatures
-//   Serial.println("DONE");
-//   // After we got the temperatures, we can print them here.
-//   // We use the function ByIndex, and as an example get the temperature from the first sensor only.
-//   float tempC = sensors.getTempCByIndex(0);
-
-//   // Check if reading was successful
-//   if(tempC != DEVICE_DISCONNECTED_C) 
-//   {
-//     Serial.print("Temperature for the device 1 (index 0) is: ");
-//     Serial.println(tempC);
-//   } 
-//   else
-//   {
-//     Serial.println("Error: Could not read temperature data");
-//   }
-// }
-void testscrolltext(void) {
-  char output[50];
-
-  display.setCursor(0, 0);
-  display.setTextSize(1); // Draw 2X-scale text
-  display.setTextColor(SSD1306_WHITE);
-  display.println("Current Temperature:");
-  display.println(" ");
-  display.setTextSize(2);
-  sensors.requestTemperatures();
-  int tempC = sensors.getTempCByIndex(0);
-
-
-
-  if(tempC != DEVICE_DISCONNECTED_C) 
-  {
-    display.print(tempC);
-    display.print("'");
-    display.print("C");
-    display.println("");
-
-
-  } 
-  else
-  {
-    display.println("Error: Could not read temperature data");
-  }
-  display.println(" ");
-  display.setTextSize(1);
-
-  DateTime now = rtc.now();
-  display.setTextSize(1); // Draw 2X-scale text
-
-  display.print(now.year(), DEC);
-
-  display.print(F("/"));
-
-  display.print(now.month(), DEC);
-
-  display.print(F("/"));
-
-  display.print(now.day(), DEC);
-
-  display.print(F(" "));
-
-
-  display.print(now.hour(), DEC);
-
-  display.print(F(":"));
-
-  display.print(now.minute(), DEC);
-
-  display.print(F(":"));
-
-  display.print(now.second(), DEC);
-
-  display.display();
-
-  sprintf(output, "%d %d %d %d %d %d %d", temC,now.year(),now.month(),now.day(),now.hour(),now.minute(),now.second());
-
-  serial.println(output);
-
-  delay(100);
-
-}
-
-void loop () {
-
-  testscrolltext();
-
-  delay(1000);
-
-  display.clearDisplay();
-
-}
+  security:
+    jwt:
+      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      expiration: 86400000 # 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # 7 days
 
