@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="crud_demo" />
+        <module name="Project_Learntify" />
+        <module name="demojwt_security" />
+        <module name="demo" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Project_Learntify" options="-parameters" />
+      <module name="crud_demo" options="-parameters" />
+      <module name="demo" options="-parameters" />
+      <module name="demojwt_security" options="-parameters" />
+    </option>
+  </component>
+</project>
