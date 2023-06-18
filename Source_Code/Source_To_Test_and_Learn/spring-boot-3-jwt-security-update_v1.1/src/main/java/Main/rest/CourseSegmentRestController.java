@@ -1,9 +1,7 @@
-package com.alibou.security.rest;
+package Main.rest;
 
-import com.alibou.security.entity.CourseSegment;
-import com.alibou.security.service.CourseSegmentService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import Main.entity.CourseSegment;
+import Main.service.CourseSegmentService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,13 +52,5 @@ public class CourseSegmentRestController {
         }
         courseSegmentService.deleteById(segmentId);
         return "Deleted CourseSegment with ID: " + segmentId;
-    }
-    @GetMapping("/course-segments/course/{courseID}")
-    public ResponseEntity<List<CourseSegment>> getCourseSegmentsByCourseID(@PathVariable int courseID) {
-        List<CourseSegment> courseSegments = courseSegmentService.getCourseSegmentsByCourseID(courseID);
-        if (courseSegments.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(courseSegments, HttpStatus.OK);
     }
 }

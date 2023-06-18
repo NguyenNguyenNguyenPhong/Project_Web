@@ -1,8 +1,8 @@
-package com.alibou.security.service;
+package Main.service;
 
 
 
-import com.alibou.security.entity.CourseSegment;
+import Main.entity.CourseSegment;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface CourseSegmentService {
     CourseSegment findById(int id);
 
     CourseSegment save(CourseSegment courseSegment);
-    List<CourseSegment> getCourseSegmentsByCourseID(int courseID);
+
     void  deleteById(int id);
 
 }

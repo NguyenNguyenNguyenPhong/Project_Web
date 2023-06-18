@@ -1,8 +1,8 @@
-package com.alibou.security.service;
+package Main.service;
 
 
-import com.alibou.security.dao.CourseSegmentRepository;
-import com.alibou.security.entity.CourseSegment;
+import Main.dao.CourseSegmentRepository;
+import Main.entity.CourseSegment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +18,7 @@ public class CourseSegmentServiceImpl implements CourseSegmentService{
     public CourseSegmentServiceImpl(CourseSegmentRepository courseSegmentRepository) {
         this.courseSegmentRepository = courseSegmentRepository;
     }
-    @Override
-    public List<CourseSegment> getCourseSegmentsByCourseID(int courseID) {
-        return courseSegmentRepository.findByCourseID(courseID);
-    }
+
     @Override
     public List<CourseSegment> findAll() {
         return courseSegmentRepository.findAll();
