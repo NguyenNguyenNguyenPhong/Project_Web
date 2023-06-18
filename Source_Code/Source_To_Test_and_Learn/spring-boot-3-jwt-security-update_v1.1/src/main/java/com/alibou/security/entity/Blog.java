@@ -13,6 +13,16 @@ public class Blog {
     private String category;
     @Column(name = "name")
     private String name;
+    @Column(name = "image")
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     @Column(name = "content")
     private String content;
@@ -23,12 +33,13 @@ public class Blog {
     public Blog() {
     }
 
-    public Blog(int blogID, String category, String name, String content, int userID) {
+    public Blog(int blogID, String category, String name,String image, String content, int userID) {
         this.blogID = blogID;
         this.category = category;
         this.name = name;
         this.content = content;
         this.userID = userID;
+        this.image = image;
     }
 
     public int getBlogID() {
