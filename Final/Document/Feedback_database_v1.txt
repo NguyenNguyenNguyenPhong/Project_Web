@@ -1,0 +1,37 @@
+Triển khai Database ở giai đoạn 1 
+
+1) Bỏ bảng Feedback (thay thế bằng ở footer mình sẽ để thông tin liên hệ để người 
+dùng muốn feedback thì có thể liên hệ trực tiếp qua việc gửi mail hoặc gọi,...)
+
+2) Bảng Category Oke nhưng cần làm rõ hơn ở việc tham chiếu ngược trong quá trình triển khai
+
+3) Bảng forSale bỏ ở giai đoạn này
+
+4) Bảng course Oke
+
+5) Bảng Blog oke (content sẽ là đường link để link dến các bài blog nổi tiếng)
+
+6) Bảng courseSegment oke
+
+7) Bảng Lecture oke
+
+8) Bảng exam lưu time bắt đầu, time kết thúc , trạng thái ngưới đó đã làm bài hay chưa, nếu làm rồi thì
+lưu số điểm đạt được ,nếu chưa làm thì để điểm là null, link trỏ đến bài thi được tạo bởi google form
+
+9) Tất cả những bảng liên quan đến câu hỏi bài thi sẽ bỏ , để người dùng tạo và thao tác trên google form
+
+10) Bảng comment bỏ ở giai đoạn này (chưa tìm được giải pháp lưu trữ content nếu như số lượng người dùng lớn và conntent nhiều thì mỗi lần load lại là một vấn đề)
+
+11) Bảng LectureNode bỏ ở giai đoạn này
+
+12) Bảng learnHistory Oke
+
+13) Bảng transectionHistory oke
+
+14) Bảng User sẽ tách thành 2 bảng user(email, pass, scopeID) và inforUser(gồm các thuộc tính còn lại của User)
+
+15) Bảng Role chưa được sẽ giải pháp như sau 
+	+) Tạo 1 bảng Scope(bảng này để chỉ phạm vi quyền của user đó)(bao gồm các thuộc tính ScopeID, admin, teacher, student, user)
+	+) Tạo 1 bảng Role (bảng này bao gồm tất cả các quyền của trang web , mỗi quyền có 1 id)(bao gồm các thuộc tính roleID, thêm sửa xóa,...)
+	+) Tạo 1 bảng ScopePermission(bảng này để biết được rằng với mỗi Scope thì sẽ có những quyền gì) (Bao gồm các thuộc tính ScopeID, roleID, status)
+	
